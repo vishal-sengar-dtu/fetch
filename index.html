@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Fetch API</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="display-1 mb-4">Fetch API</h1>
+      <div class="d-flex">
+        <button id="getText" class="btn btn-warning mr-4">Get Text</button>
+
+        <button id="getUsers" class="btn btn-success mr-4">Get JSON</button>
+
+        <button id="getPosts" class="btn btn-danger">Get API Data</button>
+      </div>
+      <hr />
+      <form id="addPost">
+        <div class="form-group">
+          <input class="form-control" placeholder="Title" id="title" />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            placeholder="Body"
+            id="body"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="row text-info" id="output" style="margin-top: 30px"></div>
+      <div class="row" id="output" style="margin-top: 30px"></div>
+      <div class="row" id="output" style="margin-top: 30px"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
