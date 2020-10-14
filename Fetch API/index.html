@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch JSON</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="contsiner ml-4">
+      <h1 class="display-1">Where is the ISS?</h1>
+      <h3 id="latitude" class="text-success"></h3>
+      <h3 id="longitude" class="text-info"></h3>
+    </div>
+    <script>
+      const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
+
+      setInterval(getISS, 1000);
+
+      async function getISS() {
+        const response = await fetch(api_url);
+        const data = await response.json();
+        const { latitude, longitude } = data;
+        document.getElementById("latitude").innerHTML = `Latitude: ${latitude}`;
+        document.getElementById(
+          "longitude"
+        ).innerHTML = `Longitude: ${longitude}`;
+      }
+    </script>
+  </body>
+</html>
+`
