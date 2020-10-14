@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fetch & Graph CSV</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
   </head>
   <body>
-    <canvas id="chart" width="800" height="390"></canvas>
+    <h1 class="text-center display-4">
+      Land-Surface Air and Sea-Surface Water Temperature
+    </h1>
+    <br />
+
+    <canvas id="chart" width="785" height="330"></canvas>
 
     <script>
       chartIt();
 
       async function chartIt() {
-        const { xs, ys } = await getData();
+        const { xs, glob, nHem, sHem } = await getData();
         const ctx = document.getElementById("chart").getContext("2d");
         const myChart = new Chart(ctx, {
           type: "line",
@@ -21,11 +30,24 @@
             labels: xs,
             datasets: [
               {
-                label:
-                  "Combined Land-Surface Air and Sea-Surface Water Temperature in °C",
-                data: ys,
-                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderColor: "rgba(255, 99, 132, 1)",
+                label: "Global Temperature in °C",
+                data: glob,
+                fill: false,
+                borderColor: "#e71d36",
+                borderWidth: 1,
+              },
+              {
+                label: "Northern Hemisphere Temperature in °C",
+                data: nHem,
+                fill: false,
+                borderColor: "#4ea8de",
+                borderWidth: 1,
+              },
+              {
+                label: "Southern Hemisphere Temperature in °C",
+                data: sHem,
+                fill: false,
+                borderColor: "#80b918",
                 borderWidth: 1,
               },
             ],
@@ -50,7 +72,9 @@
 
       async function getData() {
         const xs = [];
-        const ys = [];
+        const glob = [];
+        const nHem = [];
+        const sHem = [];
 
         const response = await fetch("ZonAnn.Ts+dSST.csv");
         const data = await response.text();
@@ -63,9 +87,13 @@
           const year = cols[0];
           xs.push(year);
           const temp = cols[1];
-          ys.push(parseFloat(temp) + 14);
+          glob.push(parseFloat(temp) + 14);
+          const nTemp = cols[2];
+          nHem.push(parseFloat(nTemp) + 14);
+          const sTemp = cols[3];
+          sHem.push(parseFloat(sTemp) + 14);
         });
-        return { xs, ys };
+        return { xs, glob, nHem, sHem };
       }
     </script>
   </body>
